@@ -49,3 +49,6 @@ Thumbs.db
 *.njsproj
 *.sln
 *.swp
+instance/
+*.db
+app/static/uploads/
