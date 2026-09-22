@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn instance to serve Barakah Backend
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/root/barakah/backend
+Environment="PATH=/root/barakah/backend/venv/bin"
+# Note: Ensure you have your environment variables set properly, e.g., in a .env file or below
+# Environment="FLASK_APP=run.py"
+ExecStart=/root/barakah/backend/venv/bin/gunicorn --workers 3 --bind unix:barakah.sock -m 007 run:app
+
+[Install]
+WantedBy=multi-user.target

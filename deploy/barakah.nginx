@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name api.barakahstz.com 94.72.107.71;
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/root/barakah/backend/barakah.sock;
+        
+        # CORS headers (if not handled by Flask-CORS)
+        # add_header 'Access-Control-Allow-Origin' '*' always;
+        # add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS, PUT, DELETE' always;
+        # add_header 'Access-Control-Allow-Headers' 'X-Requested-With,Accept,Content-Type, Authorization' always;
+    }
+}
