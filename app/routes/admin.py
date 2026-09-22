@@ -9,7 +9,7 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/api/v1/admin')
 @jwt_required()
 def get_dashboard():
     total_orders = Order.query.count()
-    total_revenue = db.session.query(db.func.sum(Order.total_amount)).scalar() or 0
+    total_revenue = db.session.query(db.func.sum(Order.total_amount)).filter(Order.status == 'Completed').scalar() or 0
     total_products = Product.query.count()
     pending_orders = Order.query.filter_by(status='Pending').count()
     
