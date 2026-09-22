@@ -5,7 +5,7 @@ echo "Starting deployment setup for Barakah Backend..."
 
 # 1. Update and install dependencies
 sudo apt-get update
-sudo apt-get install -y python3-pip python3-venv nginx python3-dev build-essential libpq-dev
+sudo apt-get install -y python3-pip python3-venv nginx python3-certbot-nginx python3-dev build-essential libpq-dev
 
 # 2. Setup virtual environment and install packages
 cd /root/barakah/backend
