@@ -12,12 +12,14 @@ def get_dashboard():
     total_revenue = db.session.query(db.func.sum(Order.total_amount)).filter(Order.status == 'Completed').scalar() or 0
     total_products = Product.query.count()
     pending_orders = Order.query.filter_by(status='Pending').count()
+    processing_orders = Order.query.filter_by(status='Processing').count()
     
     return jsonify({
         'total_orders': total_orders,
         'total_revenue': total_revenue,
         'total_products': total_products,
-        'pending_orders': pending_orders
+        'pending_orders': pending_orders,
+        'processing_orders': processing_orders
     }), 200
 
 @admin_bp.route('/orders', methods=['GET'])
@@ -59,4 +61,19 @@ def update_order_status(order_id):
     order.status = new_status
     db.session.commit()
     return jsonify({'message': 'Status updated successfully'}), 200
+
+@admin_bp.route('/orders/bulk-status', methods=['PUT'])
+@jwt_required()
+def update_bulk_order_status():
+    data = request.get_json()
+    order_ids = data.get('order_ids', [])
+    new_status = data.get('status')
+    
+    if not order_ids or not new_status:
+        return jsonify({'message': 'Missing order_ids or status'}), 400
+        
+    Order.query.filter(Order.id.in_(order_ids)).update({'status': new_status}, synchronize_session=False)
+    db.session.commit()
+    
+    return jsonify({'message': f'Status updated to {new_status} for {len(order_ids)} orders'}), 200
 
