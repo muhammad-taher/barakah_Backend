@@ -3,7 +3,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-STEADFAST_BASE_URL = 'https://portal.steadfast.com.bd/api/v1'
+STEADFAST_BASE_URL = 'https://portal.packzy.com/api/v1'
 STEADFAST_API_KEY = 'fpp5jicz79iaw017oh3jpztv1axr1zef'
 STEADFAST_SECRET_KEY = '4ovocw2wg0ytjkrb3sw46aor'
 
