@@ -8,3 +8,4 @@ python-dotenv==1.0.1
 marshmallow==3.21.1
 werkzeug==3.0.3
 gunicorn==21.2.0
+requests==2.31.0

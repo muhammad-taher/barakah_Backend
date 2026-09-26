@@ -39,6 +39,10 @@ class Order(db.Model):
     total_amount = db.Column(db.Float, nullable=False)
     status = db.Column(db.String(20), default='Pending')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    # SteadFast courier fields
+    steadfast_consignment_id = db.Column(db.Integer, nullable=True)
+    steadfast_tracking_code = db.Column(db.String(50), nullable=True)
+    steadfast_status = db.Column(db.String(50), nullable=True)
 
 class OrderItem(db.Model):
     __tablename__ = 'order_items'
